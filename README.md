@@ -1,4 +1,4 @@
 Data-Structures
 ===============
 
-Data Structures in C (Loostly following UVA CS 2150)
+Data Structures in C (Loosely following UVA CS 2150)
