@@ -1,5 +1,5 @@
 #include "Stack.h"
-/*
+/* 
 void main(){
 	Stack * myStack = init();
 	push( myStack, 1);

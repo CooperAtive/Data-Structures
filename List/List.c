@@ -1,25 +1,22 @@
 #include "List.h"
-/*void main( ){
+/*
+void main( ){
 	List * myList = (List *) malloc( sizeof( List ));
 	addToHead( myList, 5);
-	printf("top = %d\n", top( myList));
 	addToTail( myList, 4);
 	addToHead( myList, 2);
 	addToTail( myList, 3);
 	addToHead( myList, 1);
-	printf("%d\n", top( myList));
 	viewList( myList);
 	removeNode( myList, 3);
 	viewList( myList);
 	removeNode( myList, 5);
 	viewList( myList);
-	printf("%d\n", pop( myList));
 	viewList( myList);
 	clearList( myList);
 	viewList( myList);
 }
 */
-
 void addToTail(List *l, int value){
           Node * newNode = (Node *) malloc( sizeof( Node ));
           newNode->data = value;

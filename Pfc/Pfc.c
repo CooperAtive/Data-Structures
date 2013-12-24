@@ -20,7 +20,6 @@ int calculate(char * word){
 		if ( fgets (input, sizeof(input), fp) != NULL ) {
 			puts(input);
 			int i;
-			printf("%d\n", strlen(input));
 			for (i = 0; i < strlen(input) - 1; i++)
 			{
 				char * operators = "+-*/";
