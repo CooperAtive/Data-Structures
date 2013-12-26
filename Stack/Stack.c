@@ -1,7 +1,7 @@
 #include "Stack.h"
-/* 
+/*
 void main(){
-	Stack * myStack = init();
+	Stack * myStack = initStack();
 	push( myStack, 1);
 	printf("%d\n", top( myStack));
 	push( myStack, 2);
@@ -19,17 +19,15 @@ void main(){
 	}
 }
 */
-Stack * init(){
+Stack * initStack(){
 	Stack * stack = (Stack *) malloc( sizeof( Stack));
 	List * myList = (List *) malloc( sizeof ( List));
 	stack->list = myList;
 	return stack;
 }
-
 int push (Stack *s, int value){
 	addToHead(s->list, value);
 }
-
 int top(Stack *s){
 	 List * l = s->list;
          if (l->head == NULL)
@@ -38,13 +36,12 @@ int top(Stack *s){
          }
          return l->head->data;
 }
-
 int pop(Stack *s){
 	 List * l = s->list;
 	 if (l->head == NULL)
 	 {
-		printf("List is empty\n");
-		return -1;
+		printf("Stack is empty\n");
+		return -1;//error code for using Stack in PFC
 	 }
 	 int data = l->head->data;
 	 Node * temp = l->head;
@@ -56,7 +53,6 @@ int pop(Stack *s){
 	 free(temp);
          return data;
 }
-
 void clear(Stack *s){
 	clearList(s->list);
 }

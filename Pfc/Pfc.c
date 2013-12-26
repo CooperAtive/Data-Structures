@@ -9,7 +9,7 @@ int main()
 	calculate("test.txt");
 }
 int calculate(char * word){
-	Stack * myStack = init();
+	Stack * myStack = initStack();
 	FILE *fp;
 	char input[50];
 
@@ -60,12 +60,16 @@ int calculate(char * word){
 				}
 				else
 				{
-					printf("Invalid character %c in input file...Exiting\n", input[i]);
+					printf("Invalid character %c in input f							ile...Exiting\n", input[i]);
 					return 0;
 				}
-
 			}		
+	int final = pop ( myStack);
+	if (top( myStack) == -1){
+		printf("%d, if you see 'Stack is empty' printed above, the input contains too many operators for the number of integers entered.\n", final);
+		return 0;
+		}
+	printf("Input contains too many integers for the amout of operators entered.\n");
 		}	
 	}
-        viewList(myStack->list);
 }

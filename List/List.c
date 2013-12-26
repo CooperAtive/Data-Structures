@@ -127,5 +127,5 @@ int stackTop(List *l){
 		return;
 	}
 	return l->head->data;
-	}
+}
 

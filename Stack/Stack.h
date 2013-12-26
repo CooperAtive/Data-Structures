@@ -19,4 +19,4 @@ int push(Stack *, int);
 int pop(Stack *);
 int top(Stack *);
 void clear(Stack *);
-Stack * init();
+Stack * initStack();
