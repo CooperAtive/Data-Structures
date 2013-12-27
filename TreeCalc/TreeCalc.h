@@ -2,16 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../Stack/Stack.c"
+//#include "../GStack/GStack.c"
 
 typedef struct _TreeNode {
-	char * data;
-	_TreeNode * left;
-	_TreeNode * right;
+	char value;
+	struct _TreeNode * left;
+	struct _TreeNode * right;
 } TreeNode;
 
 typedef struct Tree {
 	TreeNode * root;
 } Tree;
-
-
+/*
+Tree * initTree();
+Tree * fillTree(char *);
+TreeNode * createTreeNode(char);
+int calculate(Tree *);
+*/
