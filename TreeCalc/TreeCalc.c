@@ -1,8 +1,21 @@
 #include "TreeCalc.h"
-
 int main(){
-	
+    
+    GStack * myStack = initGStack();
+    char ch[2];
+    ch[0] = 'a';
+    ch[1] = '\0';
+    TreeNode * tn =  malloc(sizeof(TreeNode));
+    tn->left = NULL;
+    tn->right = NULL;
+    tn->value = 'a';
+    printf("%c\n", tn->value);
+    void * ptr = tn;
+    TreeNode * atn = (TreeNode *) tn;
+    printf("%c\n", atn->value);
+
 }
+    /*
 
 int calculate(Tree * tree){
 	if (tree->root == NULL){
@@ -26,6 +39,7 @@ int calculate(Tree * tree){
 	}
 	
 }
+*/
 
 Tree * initTree(){
 	Tree * tree = (Tree *) malloc( sizeof( Tree));
@@ -33,13 +47,14 @@ Tree * initTree(){
 	return tree;
 }
 
-TreeNode * createTreeNode(char value){
+TreeNode * createTreeNode(char * value){
 	TreeNode * treeNode = (TreeNode *) malloc( sizeof( TreeNode));
 	treeNode->value = value;
     treeNode->left = NULL;
 	treeNode->right = NULL;
+    return treeNode;
 }	
-	
+/*	
 Tree * fillTree(char * word){
 	GStack * operands = initGStack();
     GStack * treeNodes = initGStack();
@@ -54,7 +69,7 @@ Tree * fillTree(char * word){
 			puts(input);
 			int i;
 			for (i = 0; i < strlen(input) - 1; i++){
-				char * operators = "+-*/";
+			//	char * operators = "/+-*";
 				if (isdigit(input[i])){
 					char operandArr[2];
 					operandArr[0] = input[i];
@@ -89,4 +104,4 @@ Tree * fillTree(char * word){
 		}	
 	}
 }
-
+*/

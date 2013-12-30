@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#include "../GStack/GStack.c"
+#include "../GStack/GStack.c"
 
 typedef struct _TreeNode {
 	char value;
@@ -13,9 +13,7 @@ typedef struct _TreeNode {
 typedef struct Tree {
 	TreeNode * root;
 } Tree;
-/*
 Tree * initTree();
-Tree * fillTree(char *);
-TreeNode * createTreeNode(char);
-int calculate(Tree *);
-*/
+//Tree * fillTree(char *);
+TreeNode * createTreeNode(char *);
+//int calculate(Tree *);

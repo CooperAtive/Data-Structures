@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../TreeCalc/TreeCalc.h"
 /* 
 ---------------------------
 ** type refers to variable typed to be used for any single instance of a GStack
