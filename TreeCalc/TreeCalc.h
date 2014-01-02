@@ -14,6 +14,7 @@ typedef struct Tree {
 	TreeNode * root;
 } Tree;
 Tree * initTree();
-//Tree * fillTree(char *);
-TreeNode * createTreeNode(char *);
-//int calculate(Tree *);
+GStack * fillTree(char * word);
+void insert (char, GStack *);
+TreeNode * createTreeNode(char);
+int calculate(Tree *);

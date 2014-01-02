@@ -25,4 +25,4 @@ typedef struct _GStack {
 GStack * initGStack();
 void push(GStack *, void *); 
 void * pop(GStack *); 
-void * top(GStack *);
+//void * top(GStack *);

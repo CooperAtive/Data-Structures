@@ -8,7 +8,7 @@ GStack * initGStack(){
         gStack->head = NULL;
         return gStack;
 }
-void push(GStack *s, void * dataptr){
+void push(GStack * s, void * dataptr){
 	Node * newNode = (Node *) malloc( sizeof( Node ));
 	data_t * nodeData = (data_t *) malloc( sizeof( data_t));	  
 	nodeData->p = dataptr;
@@ -27,10 +27,15 @@ void push(GStack *s, void * dataptr){
 	newNode->next = temp;
 }
 
-void * pop(GStack *s){
+void * pop(GStack * s){
+    if (s->head == NULL){
+        printf("Stack is empty");
+        return;
+    }
 	Node * temp = s->head;
 	if (s->head->next == NULL){
 		free(s->head);
+        s->head = NULL;
 		return temp->data->p;
 	}
 	s->head = s->head->next;
@@ -38,7 +43,7 @@ void * pop(GStack *s){
 	return temp->data->p;
 }
 
-void * top(GStack *s){
+void * top(GStack * s){
 	if (s->head == NULL){
 		printf("No top, list is empty");
 		return;
