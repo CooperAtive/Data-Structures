@@ -1,23 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-/* 
----------------------------
-** type refers to variable typed to be used for any single instance of a GStack
-** type = 0 - Integer
-** type = 1 - TreeNode
-** More to come....
-----------------------
-*/
 typedef struct data_t{
-	int type;
 	void * p;
+    //int type; <--- to be expanded later if GStack used with other types
 } data_t;
-typedef struct _Node {
-	struct _Node * next;
-	struct _Node * prev;
+typedef struct Node {
+	struct Node * next;
+	struct Node * prev;
 	data_t * data;
 } Node;
-typedef struct _GStack {
+typedef struct GStack {
 	Node * head;
 	Node * tail;
 } GStack;
@@ -25,4 +17,4 @@ typedef struct _GStack {
 GStack * initGStack();
 void push(GStack *, void *); 
 void * pop(GStack *); 
-//void * top(GStack *);
+void * retrieve(void *);

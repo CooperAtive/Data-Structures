@@ -36,21 +36,20 @@ void addToTail(List *l, int value){
 }
 
 void addToHead(List *l, int value){
-          Node * newNode = (Node *) malloc( sizeof( Node ));
-          newNode->data = value;
-          Node * temp = l->head;
-          if (temp == NULL)
-	  {
-         	 l->head = newNode;
-		 l->tail = newNode;
-                 newNode->next = NULL;
-                 newNode->prev = NULL;
-		 return;
-          }
-          l->head = newNode;
-          newNode->next = temp;
-	  temp->prev = newNode;
-	  newNode->prev = NULL;
+    Node * newNode = (Node *) malloc( sizeof( Node ));
+    newNode->data = value;
+    Node * temp = l->head;
+    if (temp == NULL){
+       	 l->head = newNode;
+    	 l->tail = newNode;
+         newNode->next = NULL;
+         newNode->prev = NULL;
+         return;
+    }
+    l->head = newNode;
+    newNode->next = temp;
+	temp->prev = newNode;
+	newNode->prev = NULL;
 }
 void viewList (List *l){
         if (l->head == NULL)
