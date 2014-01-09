@@ -10,11 +10,12 @@ typedef struct TreeNode {
 	char value;
 } TreeNode;
 
-typedef struct Tree {
-	TreeNode * root;
-} Tree;
-Tree * initTree();
+int emptyTree(TreeNode *);
 GStack * fillTree(char * word, GStack *);
 void insert (char, GStack *);
 TreeNode * createTreeNode(char);
 int calculate(TreeNode *);
+int is_leaf(TreeNode *);
+void print_postfix(TreeNode *);
+void print_prefix(TreeNode *);
+void print_infix(TreeNode *);

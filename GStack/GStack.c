@@ -13,30 +13,38 @@ void push(GStack * s, void * dataptr){
 	nodeData->p = dataptr;
 	Node * newNode = (Node *) malloc( sizeof( Node));
     newNode->data = nodeData;
-    Node * temp = s->head;
-    if (temp == NULL){
+    if (s->head == NULL){
         s->head = newNode;
         s->tail = newNode;
         newNode->next = NULL;
         newNode->prev = NULL;
-        return;
     }
-    s->head = newNode;
-    newNode->next = temp;
-    temp->prev = newNode;
-    newNode->prev = NULL;
-    return;
+    else{
+        Node * temp = s->head;
+        s->head = newNode;
+        newNode->next = temp;
+        temp->prev = newNode;
+        newNode->prev = NULL;
+    }
 }
 
 void * pop(GStack * s){
-	Node * temp = s->head;
+    if (s->head == NULL){
+        return NULL;
+    }
+    void * ptr = s->head->data->p;
 	if (s->head->next == NULL)
 	{
+      //  free(s->head->data->p);
+        free(s->head->data);
 		free(s->head);
-		return temp->data->p;
+        s->head = NULL;
+		return ptr;
 	}
 	s->head = s->head->next;
+    //free(s->head->prev->data->p);
+    free(s->head->prev->data);
     free(s->head->prev);
 	s->head->prev = NULL;
-	return temp->data->p;
+	return ptr;
 }
