@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     insert(mytree, myint7);
     insert(mytree, myint8);
     print_tree(mytree->root);
-    delete(mytree, 20);
+    delete(mytree, 7);
     printf("after_delete: \n");
     print_tree(mytree->root);
     destroy(mytree);
@@ -67,9 +67,49 @@ void r_destroy(treenode *root) {
 }
 
 
+/// Print
+
+void print_tree(treenode *tn) {
+    if(tn != NULL){
+        printf("%d\n", tn->data);
+        print_tree(tn->left);
+        print_tree(tn->right);
+    }
+}
+
+int p_search(treenode **cur_ptr, treenode **parent_ptr, int data) {
+    while(*cur_ptr != NULL) {
+        if((*cur_ptr)->data == data)
+            return 1;
+        else if (data > (*cur_ptr)->data) {
+            *parent_ptr = *cur_ptr;
+            *cur_ptr = (*cur_ptr)->right;
+        }
+        else { 
+            *parent_ptr = *cur_ptr;
+            *cur_ptr = (*cur_ptr)->left;
+        }
+    }
+    return 1;
+} 
+
+
+int successor_swap(treenode **cur_ptr, treenode **parent_ptr, treenode **succ_ptr, int data) {
+    *parent_ptr = *cur_ptr;
+    *succ_ptr = (*cur_ptr)->right;
+    while ((*succ_ptr)->left != NULL) {
+        *parent_ptr = *succ_ptr;
+        *succ_ptr = (*succ_ptr)->left;
+    }
+    (*cur_ptr)->data = (*succ_ptr)->data;
+    (*parent_ptr)->left = (*succ_ptr)->left;
+    free(*succ_ptr);
+    return 1;
+}
+
 //Insert/Search/Delete
 //
-//Each function has 2 versions
+//Some functions have 2 versions
 //For example: insert(tree*, int); and r_insert(treenode*, int);
 //User can use insert as a blackbox to access a tree
 //The actual meat (recursion) will occur in r_insert;
@@ -113,57 +153,44 @@ int delete(tree *t, int data) {
 
 int r_delete(treenode *root, int data) {
     treenode *cur = root;
-    treenode *succ, *p;
+    treenode *succ, *parent;
+    treenode **cur_ptr = &cur;
+    treenode **parent_ptr = &parent;
+    treenode **succ_ptr = &succ;
+    treenode arr[2];
     int dir;
-    for( ; ; ) {
-        if (cur == NULL)
-            return 0;
-        else if (cur->data == data)
-            break;
-        if (data > cur->data) {
-            p = cur;
-            cur = cur->right;
-        }
-        else { 
-            p = cur;
-            cur = cur->left;
-        }
-    }
+
+    p_search(cur_ptr, parent_ptr, data);
+
     if (cur->left != NULL && cur->right != NULL) {
-        p = cur;
+        successor_swap(cur_ptr, parent_ptr, succ_ptr, data);
+        /*
+        parent = cur;
         succ = cur->right;
         while (succ->left != NULL){
-            p = succ;
+            parent = succ;
             succ = succ->left;
         }
         cur->data = succ->data;
-        p->left = succ->left;
+        parent->left = succ->left;
 
         free(succ);
+        */
     }
     else {
-        dir = p->left == NULL;
-        if (p == NULL){
+        dir = parent->left == NULL;
+        if (parent == NULL){
             if (dir)
                 cur = cur->right;
             else
                 cur = cur->left;
         }
         else {
-            if (p->right == cur)
-                p->right = cur->right;
+            if (parent->right == cur)
+                parent->right = cur->right;
             else
-                p->left = cur->left;
+                parent->left = cur->left;
         }
         free(cur);
-    }
-}
-/// Print
-
-void print_tree(treenode *tn){
-    if(tn != NULL){
-        printf("%d\n", tn->data);
-        print_tree(tn->left);
-        print_tree(tn->right);
     }
 }

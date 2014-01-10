@@ -13,14 +13,22 @@ typedef struct tree {
     treenode *root;
 } tree;
 
+
+int p_search(treenode **, treenode **, int);
+int successor_swap(treenode **, treenode **, treenode **, int);
+
 tree * init_tree();
 treenode * make_treenode(int);
+
 int insert(tree *, int);
 treenode * r_insert(treenode*, int);
+
 int search(tree *, int);
 int r_search(treenode *, int);
+
 int delete(tree *, int);
 int r_delete(treenode *, int);
+
 void print_tree(treenode *);
 void destroy(tree *);
 void r_destroy(treenode *);
