@@ -1,0 +1,169 @@
+//Cooper Trowbridge
+//Binary Search Tree in C
+//1/10/2014
+
+#include "bst.h"
+
+int main(int argc, char **argv) {
+    tree *mytree = init_tree();
+    int myint = 20;
+    int myint2 = 15;
+    int myint3 = 25;
+    int myint4 = 7;
+    int myint5 = 24;
+    int myint6 = 18;
+    int myint7 = 26;
+    int myint8 = 17;
+    //treenode *mynode = malloc(sizeof(treenode));
+    //mynode->data = myint;
+    //mytree->root = mynode;
+    
+    //treenode *tn = make_treenode(myint);
+    //mytree->root = tn;
+    
+    insert(mytree, myint);
+    insert(mytree, myint2);
+    insert(mytree, myint3);
+    insert(mytree, myint4);
+    insert(mytree, myint5);
+    insert(mytree, myint6);
+    insert(mytree, myint7);
+    insert(mytree, myint8);
+    print_tree(mytree->root);
+    delete(mytree, 20);
+    printf("after_delete: \n");
+    print_tree(mytree->root);
+    destroy(mytree);
+    return 0;
+}
+
+
+//Constructors
+tree * init_tree() {
+    tree *t = (tree *) malloc(sizeof(tree));
+    t->root = NULL;
+    return t;
+}
+
+treenode * make_treenode(int data) {
+    treenode *tn = (treenode *) malloc(sizeof(treenode));
+    tn->data = data;
+    tn->left = NULL;
+    tn->right = NULL;
+    return tn;
+}
+//Deconstructor
+void destroy(tree *t) {
+    r_destroy(t->root);
+    free(t);
+}
+
+void r_destroy(treenode *root) {
+   if (root != NULL) {
+       r_destroy(root->left);
+       r_destroy(root->right);
+       free(root);
+   }
+}
+
+
+//Insert/Search/Delete
+//
+//Each function has 2 versions
+//For example: insert(tree*, int); and r_insert(treenode*, int);
+//User can use insert as a blackbox to access a tree
+//The actual meat (recursion) will occur in r_insert;
+
+int insert(tree* t, int data){
+    t->root = r_insert(t->root, data);
+    return 1;
+}
+
+//return 0 if node is a duplicate
+treenode * r_insert(treenode *root, int data) {
+    if (root == NULL)
+        root = make_treenode(data);
+    if (root->data == data)
+        return root;
+    if (root->data > data)
+        root->left = r_insert(root->left, data);
+    if(root->data < data)
+        root->right = r_insert(root->right, data);
+    return root;
+}
+
+int search(tree *t, int data) {
+    return r_search(t->root, data);
+}
+
+int r_search(treenode *root, int data) {
+    if (root == NULL)
+        return 0;
+    if (root->data == data)
+        return 1;
+    if (root->data < data) 
+        r_search(root->left, data);
+    if (root->data > data)
+        r_search(root->right, data);
+}
+
+int delete(tree *t, int data) {
+    return r_delete(t->root, data);
+}
+
+int r_delete(treenode *root, int data) {
+    treenode *cur = root;
+    treenode *succ, *p;
+    int dir;
+    for( ; ; ) {
+        if (cur == NULL)
+            return 0;
+        else if (cur->data == data)
+            break;
+        if (data > cur->data) {
+            p = cur;
+            cur = cur->right;
+        }
+        else { 
+            p = cur;
+            cur = cur->left;
+        }
+    }
+    if (cur->left != NULL && cur->right != NULL) {
+        p = cur;
+        succ = cur->right;
+        while (succ->left != NULL){
+            p = succ;
+            succ = succ->left;
+        }
+        cur->data = succ->data;
+        p->left = succ->left;
+
+        free(succ);
+    }
+    else {
+        dir = p->left == NULL;
+        if (p == NULL){
+            if (dir)
+                cur = cur->right;
+            else
+                cur = cur->left;
+        }
+        else {
+            if (p->right == cur)
+                p->right = cur->right;
+            else
+                p->left = cur->left;
+        }
+        free(cur);
+    }
+}
+/// Print
+
+void print_tree(treenode *tn){
+    if(tn != NULL){
+        printf("%d\n", tn->data);
+        print_tree(tn->left);
+        print_tree(tn->right);
+    }
+}
