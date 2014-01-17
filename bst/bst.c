@@ -14,12 +14,6 @@ int main(int argc, char **argv) {
     int myint6 = 18;
     int myint7 = 26;
     int myint8 = 17;
-    //treenode *mynode = malloc(sizeof(treenode));
-    //mynode->data = myint;
-    //mytree->root = mynode;
-    
-    //treenode *tn = make_treenode(myint);
-    //mytree->root = tn;
     
     insert(mytree, myint);
     insert(mytree, myint2);
@@ -29,6 +23,7 @@ int main(int argc, char **argv) {
     insert(mytree, myint6);
     insert(mytree, myint7);
     insert(mytree, myint8);
+
     print_tree(mytree->root);
     delete(mytree, 7);
     printf("after_delete: \n");

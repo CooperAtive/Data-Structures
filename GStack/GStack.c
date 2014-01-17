@@ -35,14 +35,12 @@ void * pop(GStack * s){
     void * ptr = s->head->data->p;
 	if (s->head->next == NULL)
 	{
-      //  free(s->head->data->p);
         free(s->head->data);
 		free(s->head);
         s->head = NULL;
 		return ptr;
 	}
 	s->head = s->head->next;
-    //free(s->head->prev->data->p);
     free(s->head->prev->data);
     free(s->head->prev);
 	s->head->prev = NULL;
