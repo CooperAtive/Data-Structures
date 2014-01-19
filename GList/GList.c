@@ -1,5 +1,6 @@
 #include "GList.h"
 
+/*
 void main( ){
     GList *mylist = initGList();
     char str1[] = "Cooper!";
@@ -8,10 +9,10 @@ void main( ){
     void *ptr2 = &str2;
     push(mylist, ptr1);
     push(mylist, ptr2);
-    //pop(mylist);
-    delete(mylist, str1);
-    printf("%d\n", find_node(mylist, str1));
+    delete(mylist, str2);
+    printf("%d\n", find_node(mylist, str2));
 }
+*/
 GList * initGList(){
         GList * gList = (GList *) malloc( sizeof( GList));
         gList->head = NULL;
@@ -24,7 +25,6 @@ void push(GList * l, void * dataptr){
     newNode->data = nodeData;
     if (l->head == NULL){
         l->head = newNode;
-        l->tail = newNode;
         newNode->next = NULL;
         newNode->prev = NULL;
     }
@@ -75,31 +75,32 @@ int find_node(GList *l, char *target){
 }
 
 int delete(GList *l, char *target){
-    Node * temp = l->head;
-    void * str = temp->data->p;
-    if (temp == NULL){
-        return 0;
-    }
-    while (temp != NULL)
-    {
-        if (str == target)
-        {
-            if (temp->prev = NULL){
-                free(temp->data);
-                free(temp);
-                l->head = NULL;
-                return 1;
-            }
-            else {
-                temp->prev->next = temp->next;
-                if (temp->next != NULL) temp->next->prev = temp->prev;
-                free(temp->data);
-                free(temp);
-                return 1;//maybe move this to bottom of list
-            }
-        }
-    temp = temp->next;
-    str = temp->data->p;
-    }
+	if(l->head == NULL)
+	{
+		printf("The list you are referencing is empty\n");
+	}
+	Node * temp = l->head;
+	if (l->head->data->p == target)
+	{
+		printf("Node with data = %s was removed from the list.\n", l->head->data->p);
+		l->head = l->head->next;
+		free(temp);
+		return 1;
+	}
+	while (temp != NULL)
+	{
+		if (temp->data->p == target)
+		{
+			temp->prev->next = temp->next;
+			if (temp->next != NULL)
+				temp->next->prev = temp->prev;
+
+			printf("Node with data = %s was removed from the list.\n", temp->data->p);
+			free(temp);
+			return 1;
+		}
+		temp = temp->next;
+	}
+	printf("The data you wanted to delete was not found in list.\n");
     return 0;
 }

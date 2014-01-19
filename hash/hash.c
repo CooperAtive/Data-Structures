@@ -7,42 +7,70 @@
 #define TABLE_SIZE 55457
 
 int main(int argc, char **argv) {
-    fill_table("words.txt");
+    void **table = init_table();
+    void ***tblptr = &table;
+    fill_table("words.txt", tblptr);
+    /*
+    char str[] = "Cooper";
+    void *ptr = &str;
+    push(table[1], ptr);
+    printf("%s", pop(table[1]));
+    */
+    char str[] = "acorn";
+    void *ptr = &str;
+    //push(table[hash(str)], ptr);
+    //printf("hash = %d", hash(str));
+    printf("%d", find_node(table[hash(str)], str));
+    printf("%s", pop(table[hash(str)]));
 }
-
+//Bob Jenkins One-at-a-Time hash
 unsigned long hash (unsigned char *str) {
-    unsigned long hash = 3;
-    int c, i;
-    for (i = 0; i < strlen(str); i ++){
-        hash = ((hash*311)>> 5) + str[i];
+    unsigned h = 0;
+    int i;
+
+    for (i = 0; i < strlen(str); i++) {
+        h += str[i];
+        h += ( h << 10);
+        h ^= ( h >> 6);
     }
-    hash %= TABLE_SIZE;
-    return hash;
+
+    h += (h << 3);
+    h ^= (h >> 11);
+    h += (h << 15);
+
+    return h % TABLE_SIZE;
 }
 
-int * init_table () {
-    int *table;
-    table = malloc(TABLE_SIZE*sizeof(int));
+void ** init_table () {
+    int i;
+    void **table = (void**) calloc(TABLE_SIZE, sizeof(void*));
+    printf("%d", (table == NULL));
+    GList *temp = NULL;
+    for (i = 0; i < TABLE_SIZE; i++){
+        temp = initGList();
+        table[i] = temp;
+    }
     return table;
 }
 
-int fill_table(char * words) {
-    int *table = init_table();
+int fill_table(char * words, void ***tblptr) {
     FILE *fp;
-    char *line = NULL;
+    char line[60];
     int collisions = 0;
-    size_t len = 0;
+    int len = 60;
     ssize_t read;
     int max = 0;
     fp = fopen(words, "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
-    while ((read = getline(&line, &len, fp)) != -1) {
-        if (table[hash(line)])
-            collisions++;
-        table[hash(line)] = 1;
+    while ((fgets(line, len, fp)) != NULL) {
+        char word[60] = (char *) malloc(sizeof(char));
+        //strcpy(word, line);
+        //void *ptr = word;
+        printf("%s", line);
+        push(*tblptr[hash(line)], line);       
+
     }
-    printf("Collisions: %d\n", collisions);
     if (line)
         free(line);
     return EXIT_SUCCESS;
