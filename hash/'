@@ -1,0 +1,59 @@
+//Cooper Trowbridge
+//Hash Map in C
+//1/15/2014
+
+#include "hash.h"
+#define length(a) (sizeof a / sizeof *a)
+#define TABLE_SIZE 55457
+
+int main(int argc, char **argv) {
+    fill_table("words.txt");
+}
+
+unsigned long hash (unsigned char *str) {
+    unsigned h = 0;
+    int i;
+
+    for (i = 0; i < strlen(str); i++) {
+        h += str[i];
+        h += ( h << 10);
+        h ^= ( h >> 6);
+    }
+
+    h += (h << 3);
+    h ^= (h >> 11);
+    h += (h <<15);
+}
+
+void** init_table () {
+    int i;
+    void** table = (void**) malloc(TABLE_SIZE * sizeof(void*));
+    GList *temp;
+    for (i = 0; i < TABLE_SIZE; i++){
+        temp = initGList();
+        table[i] = temp;
+    }
+    return table;
+}
+
+int fill_table(char * words) {
+    void **table = init_table();
+    FILE *fp;
+    char *line = NULL;
+    int collisions = 0;
+    size_t len = 0;
+    ssize_t read;
+    int max = 0;
+    fp = fopen(words, "r");
+    if (fp == NULL)
+        exit(EXIT_FAILURE);
+    while ((read = getline(&line, &len, fp)) != -1) {
+       // if (table[hash(line)])
+         //   collisions++;
+        //table[hash(line)] = 1;
+    }
+    printf("Collisions: %d\n", collisions);
+    if (line)
+        free(line);
+    return EXIT_SUCCESS;
+}
