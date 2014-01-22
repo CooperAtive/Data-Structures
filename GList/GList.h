@@ -17,4 +17,4 @@ GList * initGList();
 void push(GList *, void *); 
 void * pop(GList *); 
 void * retrieve(void *);
-int find_node(GList *, char *);
+int find(GList *, char *);

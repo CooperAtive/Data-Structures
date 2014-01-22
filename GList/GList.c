@@ -55,7 +55,7 @@ void * pop(GList * l){
 	l->head->prev = NULL;
 	return ptr;
 }
-int find_node(GList *l, char *target){
+int find(GList *l, char *target){
 	if(l->head == NULL)
 	{
 		printf("The list you are referencing is empty\n");

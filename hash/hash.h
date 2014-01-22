@@ -6,5 +6,5 @@
 #include "../GList/GList.c"
 
 unsigned long hash (char *);
-int filltable(char *, char **);
-char ** inittable(int);
+int filltable(char *, GList **);
+GList ** inittable();

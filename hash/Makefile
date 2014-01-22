@@ -1,7 +1,11 @@
 CFLAGS=-Wall -g
 
-debug:
+errors:
 	rm -f stringtest
-	make stringtest
-	valgrind -v ./stringtest
-clean:
+	make hash
+	valgrind -v ./hash
+
+origins:
+	rm -f stringtest
+	make hash
+	valgrind --track-origins=yes ./hash
