@@ -82,7 +82,7 @@ int delete(GList *l, char *target){
 	Node * temp = l->head;
 	if (l->head->data->p == target)
 	{
-		printf("Node with data = %s was removed from the list.\n", l->head->data->p);
+		printf("Node with data = %s was removed from the list.\n", (char *) l->head->data->p);
 		l->head = l->head->next;
 		free(temp);
 		return 1;
@@ -95,7 +95,7 @@ int delete(GList *l, char *target){
 			if (temp->next != NULL)
 				temp->next->prev = temp->prev;
 
-			printf("Node with data = %s was removed from the list.\n", temp->data->p);
+			printf("Node with data = %s was removed from the list.\n", (char *) temp->data->p);
 			free(temp);
 			return 1;
 		}

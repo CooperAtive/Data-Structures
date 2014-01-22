@@ -7,24 +7,18 @@
 #define TABLE_SIZE 55457
 
 int main(int argc, char **argv) {
-    void **table = init_table();
-    void ***tblptr = &table;
-    fill_table("words.txt", tblptr);
-    /*
-    char str[] = "Cooper";
-    void *ptr = &str;
-    push(table[1], ptr);
-    printf("%s", pop(table[1]));
-    */
-    char str[] = "acorn";
-    void *ptr = &str;
-    //push(table[hash(str)], ptr);
-    //printf("hash = %d", hash(str));
-    printf("%d", find_node(table[hash(str)], str));
-    printf("%s", pop(table[hash(str)]));
+    int size = 25000;
+    char **words = inittable(size);
+    int max = filltable("words.txt", words);
+    int k;
+    for (k = 0; k < 25000; k++)
+      printf("k = %d, %s\n", k,  words[k]);
+    printf("Max len = %d\n", max);
+
+    return 0;
 }
 //Bob Jenkins One-at-a-Time hash
-unsigned long hash (unsigned char *str) {
+unsigned long hash (char *str) {
     unsigned h = 0;
     int i;
 
@@ -41,37 +35,32 @@ unsigned long hash (unsigned char *str) {
     return h % TABLE_SIZE;
 }
 
-void ** init_table () {
+char ** inittable(int size) {
+    char **words;
+    words = malloc(size * sizeof(char*));
     int i;
-    void **table = (void**) calloc(TABLE_SIZE, sizeof(void*));
-    printf("%d", (table == NULL));
-    GList *temp = NULL;
-    for (i = 0; i < TABLE_SIZE; i++){
-        temp = initGList();
-        table[i] = temp;
+    for (i = 0; i < size; i++) {
+        char *word = (char *) malloc(32 * sizeof(char));
+        words[i] = word; 
     }
-    return table;
+    return words;
 }
 
-int fill_table(char * words, void ***tblptr) {
+int filltable (char *dict, char **words) {
     FILE *fp;
-    char line[60];
-    int collisions = 0;
-    int len = 60;
-    ssize_t read;
+    char *line = NULL;
+    size_t size = 0;
+    int j = 0;
+    int wordlen = 0;
     int max = 0;
-    fp = fopen(words, "r");
+    fp = fopen("words.txt", "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
-    while ((fgets(line, len, fp)) != NULL) {
-        char word[60] = (char *) malloc(sizeof(char));
-        //strcpy(word, line);
-        //void *ptr = word;
-        printf("%s", line);
-        push(*tblptr[hash(line)], line);       
-
+    while (j < 25000 ) {
+        wordlen = getline(&line, &size, fp);
+        strcpy(words[j], line);
+        if (wordlen > max) max = wordlen;
+        j++;
     }
-    if (line)
-        free(line);
-    return EXIT_SUCCESS;
+    return max;
 }
