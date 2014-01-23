@@ -8,3 +8,4 @@
 unsigned long hash (char *);
 int filltable(char *, GList **);
 GList ** inittable();
+int cleartable(GList **);

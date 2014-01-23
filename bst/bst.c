@@ -159,18 +159,6 @@ int r_delete(treenode *root, int data) {
 
     if (cur->left != NULL && cur->right != NULL) {
         successor_swap(cur_ptr, parent_ptr, succ_ptr, data);
-        /*
-        parent = cur;
-        succ = cur->right;
-        while (succ->left != NULL){
-            parent = succ;
-            succ = succ->left;
-        }
-        cur->data = succ->data;
-        parent->left = succ->left;
-
-        free(succ);
-        */
     }
     else {
         dir = parent->left == NULL;

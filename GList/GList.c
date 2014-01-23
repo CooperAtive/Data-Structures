@@ -2,15 +2,6 @@
 
 /*
 void main( ){
-    GList *mylist = initGList();
-    char str1[] = "Cooper!";
-    char str2[] = "Cooper?";
-    void *ptr1 = &str1;
-    void *ptr2 = &str2;
-    push(mylist, ptr1);
-    push(mylist, ptr2);
-    delete(mylist, str2);
-    printf("%d\n", find_node(mylist, str2));
 }
 */
 GList * initGList(){
@@ -59,12 +50,12 @@ int find(GList *l, char *target){
 	if(l->head == NULL)
 	{
 		printf("The list you are referencing is empty\n");
+        return 0;
 	}
 	Node * temp = l->head;
-    void * str = temp->data->p;
-	while (temp != NULL)
-	{
-		if (str == target)
+    char * str = (char *) temp->data->p;
+	while (temp != NULL) {
+		if (strcmp(str, target) == 0)
 		{
             return 1;
 		}
@@ -104,3 +95,16 @@ int delete(GList *l, char *target){
 	printf("The data you wanted to delete was not found in list.\n");
     return 0;
 }
+void clearList(GList *l){
+        Node * temp = l->head;
+        while (temp != NULL)
+        {
+                l->head = l->head->next;
+                free(temp->data->p);
+                free(temp->data);
+                free(temp);
+                temp = l->head;
+        }
+	return;
+}
+    

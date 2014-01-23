@@ -48,8 +48,8 @@ void addToHead(List *l, int value){
     }
     l->head = newNode;
     newNode->next = temp;
-	temp->prev = newNode;
-	newNode->prev = NULL;
+	  temp->prev = newNode;
+	  newNode->prev = NULL;
 }
 void viewList (List *l){
         if (l->head == NULL)

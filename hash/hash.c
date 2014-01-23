@@ -9,15 +9,28 @@
 int main(int argc, char **argv) {
     GList **table = inittable();
     filltable("words.txt", table);
-    char str[2] = {'A', 'L'};
+    char *str = (char*)  malloc(sizeof(char)*4);
+    str = "AAA\n";
     //void *ptr = str;
+    //push(table[hash(str)], ptr);
+    printf("hash(AAA) %d\n", hash(str));
     printf("%d\n", find(table[hash(str)], str));
     /*
     int max = filltable("words.txt", words);
     int k;
     printf("Max len = %d\n", max);
     */
+    cleartable(table);
     return 0;
+}
+int cleartable(GList **table) {
+    int i;
+    for (i = 0; i < TABLE_SIZE; i++) {
+        clearList(table[i]);
+        free(table[i]);
+    }
+    free(table);
+    return 1;
 }
 //Bob Jenkins One-at-a-Time hash
 unsigned long hash (char *str) {
@@ -45,6 +58,10 @@ GList ** inittable() {
         GList *list = initGList(); 
         table[i] = list; 
     }
+    char *str = "gg";
+    void *ptr = str;
+    push(table[1], ptr);
+    //printf("%d\n", i);
     return table;
 }
 
@@ -59,13 +76,17 @@ int filltable (char *dict, GList **table) {
     if (fp == NULL)
         exit(EXIT_FAILURE);
     while ((wordlen = getline(&line, &size, fp)) != -1 ) {
+        //if (j < 10)
+        {
         char *word = (char *) malloc(32 * sizeof(char));
         strcpy(word, line);
-        if(j < 10) printf("word : %s", word);
         void *wordptr = word;
         push(table[hash(word)], wordptr);
         if (wordlen > max) max = wordlen;
         j++;
+        }
     }
+    fclose(fp);
+    free(line);
     return max;
 }
