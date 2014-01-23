@@ -19,3 +19,4 @@ void * pop(GList *);
 void * retrieve(void *);
 int find(GList *, char *);
 void clearList(GList *);
+int count(GList *);

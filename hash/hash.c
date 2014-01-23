@@ -7,15 +7,23 @@
 #define length(a) sizeof(a) / sizeof(*a)
 
 int main(int argc, char **argv) {
-    /*
     GList **table = inittable();
     filltable("words.txt", table);
-    char *str = "tsarina"; 
+    char *str = "Zimmerman"; 
     printf("hash(%s) %lu\n", str, hash(str));
     printf("If 1 Found it: %d\n", find(table[hash(str)], str));
+    int i;
+    double avg = 0;
+    for (i = 0; i < TABLE_SIZE; i++) {
+        avg += count(table[i]);
+    }
+    printf("total = %f\n", avg);
+    avg /= TABLE_SIZE;
+    printf("load facts = %f\n", avg);
     cleartable(table);
-    */
+    /*
     fillgrid("prelab/4x7.grid.txt");
+    */
     return 0;
 }
 int cleartable(GList **table) {
@@ -67,7 +75,6 @@ int filltable (char *dict, GList **table) {
     if (fp == NULL)
         exit(EXIT_FAILURE);
     while ((wordlen = getline(&line, &size, fp)) != -1 ) {
-        //if (j < 10)
         {
         char *word = (char*) calloc(32, 1);
         strncpy(word, line, wordlen-1);
@@ -81,7 +88,7 @@ int filltable (char *dict, GList **table) {
     free(line);
     return max;
 }
-
+/*
 char ** fillgrid (char *input) {
     FILE *fp;
     int rows; 
@@ -99,7 +106,6 @@ char ** fillgrid (char *input) {
         if (linenumber == 2) {
             cols = atoi(line);
         }
-        //printf("%s", line);
         if (linenumber == 3) 
         {
             char **grid = (char **) calloc(rows, cols);
@@ -116,7 +122,7 @@ char ** fillgrid (char *input) {
     free(line);
     return NULL;
 }        
-        
+*/        
         
         
         

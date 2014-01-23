@@ -9,6 +9,15 @@ GList * initGList(){
         gList->head = NULL;
         return gList;
 }
+int count(GList *l) {
+    int count = 0;
+    Node *temp = l->head;
+    while (temp != NULL){
+        temp = temp->next;
+        count++;
+    }
+    return count;
+}
 void push(GList * l, void * dataptr){
 	data_t * nodeData = (data_t *) malloc( sizeof( data_t));	  
 	nodeData->p = dataptr;
