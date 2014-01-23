@@ -53,13 +53,14 @@ int find(GList *l, char *target){
         return 0;
 	}
 	Node * temp = l->head;
-    char * str = (char *) temp->data->p;
+    char * str = temp->data->p;
 	while (temp != NULL) {
 		if (strcmp(str, target) == 0)
 		{
             return 1;
 		}
 		temp = temp->next;
+        str = (char *) temp->data->p;
 	}
 	printf("Target data not found in list.\n");
     return 0;
@@ -96,14 +97,15 @@ int delete(GList *l, char *target){
     return 0;
 }
 void clearList(GList *l){
+        //if (l == NULL) return;
         Node * temp = l->head;
         while (temp != NULL)
         {
-                l->head = l->head->next;
-                free(temp->data->p);
-                free(temp->data);
-                free(temp);
-                temp = l->head;
+            l->head = l->head->next;
+            free(temp->data->p);
+            free(temp->data);
+            free(temp);
+            temp = l->head;
         }
 	return;
 }
