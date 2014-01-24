@@ -19,3 +19,8 @@ gdb:
 	rm -f hash
 	make hash
 	gdb ./hash
+
+s:
+	rm -f stringtest
+	make stringtest
+	gdb ./stringtest

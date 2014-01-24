@@ -5,26 +5,24 @@
 #include "hash.h"
 #define TABLE_SIZE 55457
 #define length(a) sizeof(a) / sizeof(*a)
+extern int rows, cols, maxwordlen;
+int rows = 0, cols = 0, maxwordlen = 0;
 
 int main(int argc, char **argv) {
     GList **table = inittable();
     filltable("words.txt", table);
-    char *str = "Zimmerman"; 
-    printf("hash(%s) %lu\n", str, hash(str));
-    printf("If 1 Found it: %d\n", find(table[hash(str)], str));
-    int i;
+    fillgrid("prelab/3x3.grid.txt");
+    cleartable(table);
+    return 0;
+}
+double loadfactor(GList ** table){
     double avg = 0;
+    int i;
     for (i = 0; i < TABLE_SIZE; i++) {
         avg += count(table[i]);
     }
-    printf("total = %f\n", avg);
     avg /= TABLE_SIZE;
-    printf("load facts = %f\n", avg);
-    cleartable(table);
-    /*
-    fillgrid("prelab/4x7.grid.txt");
-    */
-    return 0;
+    return avg;
 }
 int cleartable(GList **table) {
     int i;
@@ -70,7 +68,6 @@ int filltable (char *dict, GList **table) {
     size_t size = 0;
     int j = 0;
     int wordlen = 0;
-    int max = 0;
     fp = fopen(dict, "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
@@ -79,41 +76,38 @@ int filltable (char *dict, GList **table) {
         char *word = (char*) calloc(32, 1);
         strncpy(word, line, wordlen-1);
         push(table[hash(word)], word);
-        if (wordlen > max) max = wordlen;
+        if (wordlen > maxwordlen) maxwordlen = wordlen;
         j++;
         }
     }
-    printf("max = %d\n", max);
     fclose(fp);
     free(line);
-    return max;
+    return 1;
 }
-/*
+
 char ** fillgrid (char *input) {
     FILE *fp;
-    int rows; 
-    int cols;
+    int linenumber = 1, i, j; 
     char *line = NULL;
     size_t size = 0;
-    int linenumber = 1;
     fp = fopen(input, "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
     while (getline(&line, &size, fp) != -1) {
-        if (linenumber == 1) {
-            rows = atoi(line);
-        }
-        if (linenumber == 2) {
-            cols = atoi(line);
-        }
+        if (linenumber == 1) rows = atoi(line);
+        if (linenumber == 2) cols = atoi(line);
         if (linenumber == 3) 
         {
             char **grid = (char **) calloc(rows, cols);
-            int i = 0; 
-            while (line[i]) {
+            for (i = 0; i < rows; i++){
                 char *row = (char *) calloc(cols, sizeof(char));
-                strncpy(grid[i]///////////////IMHERERERKJHGAKJHGKSAJDGFHKSJDHG
-            break;
+                grid[i] = row;
+                for (j = 0; j < cols; j++) {
+                    grid[i][j] = line[(cols * i) + j];
+                }
+            }
+            for (i = 0; i < rows; i++) printf("%s\n", grid[i]);
+            search_grid(grid);
         }
         linenumber++;
     }
@@ -122,9 +116,23 @@ char ** fillgrid (char *input) {
     free(line);
     return NULL;
 }        
-*/        
         
-        
+int search_grid(char **grid) {
+    int i, j;
+    for (i = 0; i < rows; i++){
+        for (j = 0; j < cols; j++) {
+            search_letter(&grid[i][j], i, j);
+        }
+    }
+    return 1;
+}
+
+int search_letter(char *start, int row, int col) {
+    printf("%c\n", *start);
+    return 1;
+}
+
+
         
         
         

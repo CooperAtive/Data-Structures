@@ -29,11 +29,13 @@ int main(int argc, char **argv) {
     }
     */
     //mallopt(M_MMAP_THRESHOLD, 2048);
-    int size = 25000;
+    int size = 5;
     char **words = inittable(size);
+    char *str = malloc(7);
+    str = "cooper";
     int max = filltable("words.txt", words);
     int k;
-    for (k = 0; k < 25000; k++)
+    for (k = 0; k < 5; k++)
       printf("k = %d, %s\n", k,  words[k]);
     printf("Max len = %d\n", max);
 
@@ -62,7 +64,7 @@ int filltable (char *dict, char **words) {
     fp = fopen("words.txt", "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
-    while (j < 25000 ) {
+    while (j < 5 ) {
         wordlen = getline(&line, &size, fp);
         strcpy(words[j], line);
         if (wordlen > max) max = wordlen;

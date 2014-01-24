@@ -10,3 +10,6 @@ int filltable(char *, GList **);
 GList ** inittable();
 int cleartable(GList **);
 char ** fillgrid(char *);
+int search_grid(char **);
+int search_letter(char *, int, int);
+double loadfactor(GList **);
