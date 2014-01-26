@@ -233,7 +233,7 @@ int search_letter(char **grid, int i, int j, int dir, GList **table, FILE *outfi
     return 1;
 }
 int inbounds(int i, int j, int pos) {
-    if (i < rows && j < cols && i > -1 && j > -1 && pos < 23)
+    if (i < rows && j < cols && i > -1 && j > -1 && pos < maxwordlen)
         return 1;
     else
         return 0;
