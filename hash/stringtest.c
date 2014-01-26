@@ -38,7 +38,6 @@ int main(int argc, char **argv) {
     for (k = 0; k < 5; k++)
       printf("k = %d, %s\n", k,  words[k]);
     printf("Max len = %d\n", max);
-
     return 0;
 }
 

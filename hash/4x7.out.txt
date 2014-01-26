@@ -1,0 +1,10 @@
+E (0, 3):  sod
+SW (0, 6):  tat
+E (1, 0):  pax
+E (2, 0):  ace
+NE (2, 4):  tat
+W (2, 4):  tee
+N (2, 5):  fad
+N (3, 2):  text
+NW (3, 6):  eft
+9 words found

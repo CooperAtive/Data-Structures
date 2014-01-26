@@ -58,20 +58,17 @@ void * pop(GList * l){
 int find(GList *l, char *target){
 	if(l->head == NULL)
 	{
-		printf("The list you are referencing is empty\n");
         return 0;
 	}
 	Node * temp = l->head;
-    char * str = temp->data->p;
 	while (temp != NULL) {
+        char *str = (char *) temp->data->p;
 		if (strcmp(str, target) == 0)
 		{
             return 1;
 		}
 		temp = temp->next;
-        str = (char *) temp->data->p;
 	}
-	printf("Target data not found in list.\n");
     return 0;
 }
 
