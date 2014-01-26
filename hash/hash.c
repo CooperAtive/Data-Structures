@@ -129,7 +129,7 @@ int search_grid(char **grid, GList **table) {
         }
     }
     fprintf(outfile, "%d words found\n", wordcount);
-    fclose(outfile);
+    //fclose(outfile);
     return 1;
 }
 
@@ -241,6 +241,7 @@ int inbounds(int i, int j, int pos) {
 FILE * open_outfile() {
     char filename[50];
     sprintf(filename, "%dx%d.out.txt", rows, cols);
+    printf("%s\n", filename);
     FILE *fp = fopen(filename, "w");
     return fp;
 }
