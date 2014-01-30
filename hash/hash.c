@@ -56,8 +56,8 @@ GList ** inittable() {
     table = malloc(TABLE_SIZE * sizeof(GList *));
     int i;
     for (i = 0; i < TABLE_SIZE; i++) {
-        GList *list = initGList(); 
-        table[i] = list; 
+        GList *list = initGList();
+        table[i] = list;
     }
     return table;
 }
@@ -87,7 +87,7 @@ int filltable (char *dict, GList **table) {
 
 char ** fillgrid (char *input) {
     FILE *fp;
-    int linenumber = 1, i, j; 
+    int linenumber = 1, i, j;
     char *line = NULL;
     size_t size = 0;
     fp = fopen(input, "r");
@@ -96,7 +96,7 @@ char ** fillgrid (char *input) {
     while (getline(&line, &size, fp) != -1) {
         if (linenumber == 1) rows = atoi(line);
         if (linenumber == 2) cols = atoi(line);
-        if (linenumber == 3) 
+        if (linenumber == 3)
         {
             char **grid = (char **) calloc(rows, cols);
             for (i = 0; i < rows; i++){
@@ -115,8 +115,8 @@ char ** fillgrid (char *input) {
     fclose(fp);
     free(line);
     return NULL;
-}        
-        
+}
+
 int search_grid(char **grid) {
     int i, j;
     for (i = 0; i < rows; i++){
@@ -124,17 +124,20 @@ int search_grid(char **grid) {
             search_letter(&grid[i][j], i, j);
         }
     }
+    printf("\n");
     return 1;
 }
 
 int search_letter(char *start, int row, int col) {
-    printf("%c\n", *start);
+    char string[23];
+    string[0] = *start;
+    printf("%s", string);
     return 1;
 }
 
 
-        
-        
-        
-            
- 
+
+
+
+
+
