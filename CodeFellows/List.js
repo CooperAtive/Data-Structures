@@ -29,6 +29,10 @@ function listReverse(list){
     return finalList;
 }
 
+function recursiveReverse(acc, list) {
+    if (list === null) return acc;
+    return recursiveReverse({head: list.head, tail: acc}, list.tail);
+}
+
 console.log(JSON.stringify(listReverse(list)));
-
-
+console.log(JSON.stringify(recursiveReverse(null, list)));
