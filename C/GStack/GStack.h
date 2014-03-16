@@ -15,6 +15,6 @@ typedef struct GStack {
 } GStack;
 
 GStack * initGStack();
-void push(GStack *, void *); 
-void * pop(GStack *); 
+void push(GStack *, void *);
+void * pop(GStack *);
 void * retrieve(void *);

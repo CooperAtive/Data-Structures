@@ -9,7 +9,7 @@ GStack * initGStack(){
         return gStack;
 }
 void push(GStack * s, void * dataptr){
-	data_t * nodeData = (data_t *) malloc( sizeof( data_t));	  
+	data_t * nodeData = (data_t *) malloc( sizeof( data_t));
 	nodeData->p = dataptr;
 	Node * newNode = (Node *) malloc( sizeof( Node));
     newNode->data = nodeData;

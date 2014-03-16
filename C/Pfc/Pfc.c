@@ -16,7 +16,7 @@ int calculate(char * word){
 	fp = fopen(word, "r");
 	if ( fp == NULL) perror("Error opening file");
 	else
-	{	
+	{
 		if ( fgets (input, sizeof(input), fp) != NULL ) {
 			puts(input);
 			int i;
@@ -28,7 +28,7 @@ int calculate(char * word){
 					char array[2];
 					array[0] = input[i];
 					array[1] = '\0';
-					int operand = atoi(array);	
+					int operand = atoi(array);
 					push( myStack, operand);
 				}
 				else if (strchr(operators, input[i]) != NULL)
@@ -63,13 +63,13 @@ int calculate(char * word){
 					printf("Invalid character %c in input f							ile...Exiting\n", input[i]);
 					return 0;
 				}
-			}		
+			}
 	int final = pop ( myStack);
 	if (top( myStack) == -1){
 		printf("%d, if you see 'Stack is empty' printed above, the input contains too many operators for the number of integers entered.\n", final);
 		return 0;
 		}
 	printf("Input contains too many integers for the amout of operators entered.\n");
-		}	
+		}
 	}
 }

@@ -1,6 +1,6 @@
 //includes
 //LList.c
-//stack has a linked list called list or the list 
+//stack has a linked list called list or the list
 //functions
 //	take a stack instead of list
 //	Push, pop returns it

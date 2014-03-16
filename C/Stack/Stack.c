@@ -12,8 +12,8 @@ void main(){
 	if (top( myStack) == -1)
 	{
 		printf("No top, list is empty\n");
-	} 
-	else 
+	}
+	else
 	{
 	printf("%d\n", top( myStack));
 	}
