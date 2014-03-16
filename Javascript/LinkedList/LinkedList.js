@@ -1,7 +1,6 @@
 'use strict';
 /*jshint -W055 */
 
-
 var ListNode = require('./ListNode').ListNode;
 var LinkedList = function LinkedList(){
     var self = this;
@@ -66,9 +65,4 @@ var LinkedList = function LinkedList(){
     return new constructor();
 };
 
-var myList = new LinkedList();
-myList.push(3);
-myList.push(1);
-myList.push(2);
-console.log(JSON.stringify(myList));
 module.exports.LinkedList = LinkedList;
