@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     int myint6 = 18;
     int myint7 = 26;
     int myint8 = 17;
-    
+
     insert(mytree, myint);
     insert(mytree, myint2);
     insert(mytree, myint3);
@@ -80,13 +80,13 @@ int p_search(treenode **cur_ptr, treenode **parent_ptr, int data) {
             *parent_ptr = *cur_ptr;
             *cur_ptr = (*cur_ptr)->right;
         }
-        else { 
+        else {
             *parent_ptr = *cur_ptr;
             *cur_ptr = (*cur_ptr)->left;
         }
     }
     return 1;
-} 
+}
 
 
 int successor_swap(treenode **cur_ptr, treenode **parent_ptr, treenode **succ_ptr, int data) {
@@ -136,7 +136,7 @@ int r_search(treenode *root, int data) {
         return 0;
     if (root->data == data)
         return 1;
-    if (root->data < data) 
+    if (root->data < data)
         r_search(root->left, data);
     if (root->data > data)
         r_search(root->right, data);
