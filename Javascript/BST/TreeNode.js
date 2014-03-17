@@ -2,8 +2,8 @@
 /*jshint -W055 */
 /*jshint -W098 */
 
-var TreeNode = function TreeNode(value){
-    return {root: value, left: null, right: null};
+var TreeNode = function TreeNode(val){
+    return {value: val, left: null, right: null};
 };
 
 module.exports.TreeNode = TreeNode;
